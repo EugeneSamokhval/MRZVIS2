@@ -56,8 +56,8 @@ def function_F_of_i_j_k(matrix_F, matrix_1, matrix_2, matrix_3, i, j, k):
     callsOfMultiplying += 7
     callsOfDifference += 3
     callsOfSumm += 2
-    matrix_F[i][j][k] = more(matrix_1, k, j) * (2. * matrix_3[k] - 1.) * matrix_3[k] + more_inverse(
-        matrix_2, k, i) * (1. + (4. * more(matrix_1, k, j) - 2.) * matrix_3[k]) * (1. - matrix_3[k])
+    matrix_F[i][j][k] = more(matrix_1, j, k) * (2. * matrix_3[k] - 1.) * matrix_3[k] + more_inverse(
+        matrix_2, k, i) * (1. + (4. * more(matrix_1, j, k) - 2.) * matrix_3[k]) * (1. - matrix_3[k])
     return matrix_F
 
 
