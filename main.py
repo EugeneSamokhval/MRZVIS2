@@ -151,6 +151,7 @@ def main():
 
     matrix_output(matrix=matrix_A, name='A')
     matrix_output(matrix=matrix_B, name='B')
+    matrix_output(matrix=matrix_E, name='E')
     matrix_output(matrix=matrix_G, name='G')
 
     for i in range(p):
