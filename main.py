@@ -107,8 +107,37 @@ def matrix_output(matrix, name):
     print(50*"__"+"\n")
 
 
+def ProgramAttributesCounterResult(p, q, m, r):
+    global T1, timeOfSumm, callsOfSumm, timeOfDifference, callsOfDifference, timeOfMultiplying, callsOfMultiplying, timeOfCom, callsOfCom, Tn, Ky, Eff, Lavg, Diff
+    T1 = timeOfSumm * callsOfSumm + timeOfDifference * callsOfDifference + \
+        timeOfMultiplying * callsOfMultiplying + timeOfCom * callsOfCom
+    if (Tn > T1):
+        Tn = T1
+    Ky = T1 / Tn
+    Eff = Ky / n
+    # D
+    Lavg = timeOfMultiplying * r
+    # F
+    Lavg += (7 * timeOfMultiplying + 3 * timeOfDifference + 2 * timeOfSumm) * r
+    # C
+    Lavg += (8 * timeOfMultiplying + 3 *
+             timeOfDifference + 2 * timeOfSumm) * p * q
+    # a_or_b
+    Lavg += (timeOfCom + timeOfSumm + timeOfDifference) * (m - 1) * 2 * p * q
+    # D_func
+    Lavg += (timeOfMultiplying * (m - 1) +
+             timeOfDifference * (m + 1)) * 3 * p * q
+    # a_to_b
+    Lavg += (timeOfCom)*r * 3
+    Lavg = math.ceil(Lavg / r)
+    Diff = Tn / Lavg
+
+    print(
+        f"T1= {T1}\nTn= {Tn}\nKy= {Ky}\ne= {Eff}\nLsum= {Tn}\nLavg= {Lavg}\nD= {Diff}")
+
+
 def main():
-    global Tn
+    global Tn, m, p, q, n
     m, p, q, n = [int(entry) for entry in input(
         "Введите m p q n через пробел\n").split(' ')]
     r = p * m * q
@@ -152,31 +181,7 @@ def main():
     Tn += (FTime + DTime + operationTime) * math.ceil((p * q) / n)
     matrix_output(matrix=matrix_C, name='C')
 
-    T1 = timeOfSumm * callsOfSumm + timeOfDifference * callsOfDifference + \
-        timeOfMultiplying * callsOfMultiplying + timeOfCom * callsOfCom
-    if (Tn > T1):
-        Tn = T1
-    Ky = T1 / Tn
-    Eff = Ky / n
-    # D
-    Lavg = timeOfMultiplying * r
-    # F
-    Lavg += (7 * timeOfMultiplying + 3 * timeOfDifference + 2 * timeOfSumm) * r
-    # C
-    Lavg += (8 * timeOfMultiplying + 3 *
-             timeOfDifference + 2 * timeOfSumm) * p * q
-    # a_or_b
-    Lavg += (timeOfCom + timeOfSumm + timeOfDifference) * (m - 1) * 2 * p * q
-    # D_func
-    Lavg += (timeOfMultiplying * (m - 1) +
-             timeOfDifference * (m + 1)) * 3 * p * q
-    # a_to_b
-    Lavg += (timeOfCom)*r * 3
-    Lavg = math.ceil(Lavg / r)
-    Diff = Tn / Lavg
-
-    print(
-        f"T1= {T1}\nTn= {Tn}\nKy= {Ky}\ne= {Eff}\nLsum= {Tn}\nLavg= {Lavg}\nD= {Diff}")
+    ProgramAttributesCounterResult(p, q, m, r)
 
 
 if __name__ == "__main__":
